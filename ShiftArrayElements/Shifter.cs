@@ -12,7 +12,7 @@ namespace ShiftArrayElements
         /// <returns>An array with shifted elements.</returns>
         /// <exception cref="ArgumentNullException">source array is null.</exception>
         /// <exception cref="ArgumentNullException">iterations array is null.</exception>
-        public static int[] Shift(int[] source, int[] iterations)
+        public static int[] Shift(int[]? source, int[]? iterations)
         {
             // TODO #2. Implement the method using "for" statements and Array.Copy method.
             throw new NotImplementedException();
