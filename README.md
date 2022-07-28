@@ -76,7 +76,7 @@ The `source` array contains three elements [1, 2, 3]. The `directions` array has
 
 #### Example #3.
 
-The `source` array contains three elements [1, 2, 3]. The `directions` array has two elements [Left, Right, Left], that means there will be three shift iterations.
+The `source` array contains three elements [1, 2, 3]. The `directions` array has three elements [Left, Right, Left], that means there will be three shift iterations.
 
 | Array Index                  | 0 | 1 | 2 |
 |------------------------------|---|---|---|
