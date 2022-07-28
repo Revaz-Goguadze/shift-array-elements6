@@ -1,6 +1,6 @@
 # Shift Array Elements
 
-Intermediate level task for practicing loops and arrays. The task has extra tests that are not in the task repository.
+Intermediate level task for practicing loops, arrays and enums. The task has extra tests that are not in the task repository.
 
 Estimated time to complete the task - 1h.
 
