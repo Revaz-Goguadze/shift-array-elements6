@@ -1,24 +1,33 @@
 # Shift Array Elements
 
-Intermediate level task for practicing loops and arrays.
+Intermediate level task for practicing loops and arrays. The task has extra tests that are not in the task repository.
 
-The task is to implement 2 methods using "for" statements, array indices and Array.Copy method. The task has **hidden tests**.
+Estimated time to complete the task - 1h.
+
+The task requires .NET 6 SDK installed.
 
 
 ## Task Description
 
-In the task you are allowed to use "for" statements, Array.Copy method and indexers only. You are _not allowed_ to use extension methods from [System.Linq namespace](https://docs.microsoft.com/en-us/dotnet/api/system.linq), [static methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members) or [local functions](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions).
+Use the `for` statement to iterate over an array and [Array.Copy](https://docs.microsoft.com/en-us/dotnet/api/system.array.copy) method to copy array elements and indexers only.
 
-Code should be simple and clear as possible.
+Don't use:
+* [Linq extension methods](https://docs.microsoft.com/en-us/dotnet/api/system.linq)
+* [Static methods](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members)
+* [local functions](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions)
+
+The task code should be simple and clear as possible.
 
 
 ### 1. EnumShifter Class
 
-Implement the "Shift" method in the [EnumShifter.cs](ShiftArrayElements/EnumShifter.cs) file using "for" statements and array indices only.
+Implement the [Shift](ShiftArrayElements/EnumShifter.cs#L16) method using the `for` statement and array indexes only.
 
-The method has two arguments. The "source" arguments has the array of integers to shift and return. _Do not create a new array_. The "directions" argument has the array of values of the "Direction" enum type. Each value in the "directions" array is a shift instruction that tells the shift direction for each iteration. The number of iterations is the "direction" array length. The first and the last elements in the "source" array should be wrapped to the other side of the array.
+The `Shift` method has two arguments:
+* The `source` arguments is the array of integers to shift and return. **Do not** create a new array.
+* The `directions` argument is the array of values of the [Direction](ShiftArrayElements/Direction.cs) enum type. Each value in the `directions` array is a shift instruction that tells the shift direction for each iteration. The number of iterations is the `direction` array length. The first and the last elements in the `source` array should be wrapped to the other side of the array.
 
-Use "switch" statement to handle "directions" array values. Use "default" branch to handle the values other then "Left" and "Right".
+Use `switch` statement to handle `directions` array values. Use `default` branch to handle the values other then `Left` and `Right`.
 
 ```cs
 switch (currentDirection)
@@ -44,7 +53,7 @@ See examples for more details regarding the shift algorithm.
 
 #### Example #1.
 
-The "source" array contains three elements [1, 2, 3]. The "directions" array has only one element [Left], that means there will be only one shift iteration.
+The `source` array contains three elements [1, 2, 3]. The `directions` array has only one element [Left], that means there will be only one shift iteration.
 
 | Array Index                  | 0 | 1 | 2 |
 |------------------------------|---|---|---|
@@ -55,7 +64,7 @@ The "source" array contains three elements [1, 2, 3]. The "directions" array has
 
 #### Example #2.
 
-The "source" array contains three elements [1, 2, 3]. The "directions" array has two elements [Left, Left], that means there will be two shift iterations.
+The `source` array contains three elements [1, 2, 3]. The `directions` array has two elements [Left, Left], that means there will be two shift iterations.
 
 | Array Index                  | 0 | 1 | 2 |
 |------------------------------|---|---|---|
@@ -67,7 +76,7 @@ The "source" array contains three elements [1, 2, 3]. The "directions" array has
 
 #### Example #3.
 
-The "source" array contains three elements [1, 2, 3]. The "directions" array has two elements [Left, Right, Left], that means there will be three shift iterations.
+The `source` array contains three elements [1, 2, 3]. The `directions` array has two elements [Left, Right, Left], that means there will be three shift iterations.
 
 | Array Index                  | 0 | 1 | 2 |
 |------------------------------|---|---|---|
@@ -80,16 +89,18 @@ The "source" array contains three elements [1, 2, 3]. The "directions" array has
 
 ### 2. Shifter Class
 
-Implement the "Shift" method in the [Shifter.cs](ShiftArrayElements/Shifter.cs) file using "for" statements, array indices and Array.Copy method for copying array elements.
+Implement the [Shift](ShiftArrayElements/Shifter.cs#L15) method using the `for` statement, array indexes and `Array.Copy` method.
 
-The method has two arguments. The "source" arguments has the array of integers to shift and return. _Do not create a new array_. The "iterations" argument has the array of integers. Each value in the "iterations" array is a shift instruction that tells the number of shift iterations. The odd elements (an element with odd index) tells the number of right shift iterations. The even elements (an element with even index or zero index) tells the number of left shift iterations. The first and the last elements in the "source" array should be wrapped to the other side of the array.
+The method has two arguments.
+* The `source` arguments has the array of integers to shift and return. **Do not** create a new array.
+* The `iterations` argument has the array of integers. Each value in the `iterations` array is a shift instruction that tells the number of shift iterations. The odd elements (an element with odd index) tells the number of right shift iterations. The even elements (an element with even index or zero index) tells the number of left shift iterations. The first and the last elements in the `source` array should be wrapped to the other side of the array.
 
 See examples for more details regarding the shift algorithm.
 
 
 #### Example #4.
 
-The "source" array contains three elements [1, 2, 3]. The "iterations" array has only one element [1], that means there will be only one left shift iteration ("1" is an zero index element).
+The `source` array contains three elements [1, 2, 3]. The `iterations` array has only one element [1], that means there will be only one left shift iteration (`1` is an zero index element).
 
 | Array Index                     | 0 | 1 | 2 |
 |---------------------------------|---|---|---|
@@ -100,7 +111,7 @@ The "source" array contains three elements [1, 2, 3]. The "iterations" array has
 
 #### Example #5.
 
-The "source" array contains three elements [1, 2, 3]. The "iterations" array has two elements [0, 1], that means there will be only one right shift iteration ("1" is an odd index element).
+The `source` array contains three elements [1, 2, 3]. The `iterations` array has two elements [0, 1], that means there will be only one right shift iteration (`1` is an odd index element).
 
 | Array Index                     | 0 | 1 | 2 |
 |---------------------------------|---|---|---|
@@ -112,7 +123,7 @@ The "source" array contains three elements [1, 2, 3]. The "iterations" array has
 
 #### Example #6.
 
-The "source" array contains three elements [1, 2, 3]. The "iterations" array has two elements [2, 1], that means there will be two left shift iterations and one right shift iteration.
+The `source` array contains three elements [1, 2, 3]. The `iterations` array has two elements [2, 1], that means there will be two left shift iterations and one right shift iteration.
 
 | Array Index                     | 0 | 1 | 2 |
 |---------------------------------|---|---|---|
@@ -125,7 +136,7 @@ The "source" array contains three elements [1, 2, 3]. The "iterations" array has
 
 #### Example #7.
 
-The "source" array contains three elements [1, 2, 3]. The "iterations" array has three elements [1, 2, 3], that means there will be six iterations (one left shift iteration, then two right shift iterations, and then three left shift iterations).
+The `source` array contains three elements [1, 2, 3]. The `iterations` array has three elements [1, 2, 3], that means there will be six iterations (one left shift iteration, then two right shift iterations, and then three left shift iterations).
 
 | Array Index                     | 0 | 1 | 2 |
 |---------------------------------|---|---|---|
