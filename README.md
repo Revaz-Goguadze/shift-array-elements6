@@ -1,6 +1,6 @@
 # Shift Array Elements
 
-Intermediate level task for practicing loops, arrays and enums. The task has extra tests that are not in the task repository.
+Intermediate level task for practicing loops, arrays and enums.
 
 Estimated time to complete the task - 1h.
 
@@ -148,11 +148,6 @@ The `source` array contains three elements [1, 2, 3]. The `iterations` array has
 | Iteration 5: Element 3 (left)   | 2 | 3 | 1 |
 | Iteration 6: Element 3 (left)   | 3 | 1 | 2 |
 | Result                          | 3 | 1 | 2 |
-
-
-## Hidden Tests
-
-The task has hidden unit tests that are not available in your solution, but will be run by the portal when you will start the task check. The hidden unit test may fail if your solution is not good enough to cover all the test cases.
 
 
 ## See also
