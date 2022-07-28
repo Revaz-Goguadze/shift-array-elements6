@@ -5,117 +5,90 @@ namespace ShiftArrayElements.Tests
     [TestFixture]
     public class ShifterTests
     {
-        [Test]
-        public void Shift_SourceIsNull_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() => Shifter.Shift(null, Array.Empty<int>()));
-        }
-
-        [Test]
-        public void Shift_SourceIsNull_ThrowsArgumentNullExceptionWithCorrectParameterName()
-        {
-            try
-            {
-                Shifter.Shift(null, Array.Empty<int>());
-            }
-            catch (ArgumentNullException e) when (e.ParamName == "source")
-            {
-            }
-        }
-
-        [Test]
-        public void Shift_IterationsIsNull_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() => Shifter.Shift(Array.Empty<int>(), null));
-        }
-
-        [Test]
-        public void Shift_IterationsIsNull_ThrowsArgumentNullExceptionWithCorrectParameterName()
-        {
-            try
-            {
-                Shifter.Shift(Array.Empty<int>(), null);
-            }
-            catch (ArgumentNullException e) when (e.ParamName == "iterations")
-            {
-            }
-        }
-
         [TestCase(new int[] { })]
         [TestCase(new int[] { 1 })]
         [TestCase(new int[] { 1, 2, 3, 4, 5 })]
         public void Shift_SourceIsNotNull_SourceEqualsResult(int[] source)
         {
-            int[] result = Shifter.Shift(source, Array.Empty<int>());
+            // Arrange
+            int[] actualResult = (int[])source.Clone();
 
-            Assert.AreSame(source, result);
+            // Act
+            Shifter.Shift(actualResult, Array.Empty<int>());
+
+            // Assert
+            Assert.That(actualResult, Is.EqualTo(source));
         }
 
-        [TestCase(new int[] { }, new[] { 0 }, ExpectedResult = new int[] { })]
-        [TestCase(new int[] { }, new int[] { }, ExpectedResult = new int[] { })]
-        [TestCase(new[] { 1 }, new int[] { }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 0 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 1 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 2 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 3 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 4 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 0, 0 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 0, 1 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 0, 2 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 0, 3 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 0, 4 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 1, 0 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 1, 1 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 1, 2 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 1, 3 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 1, 4 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 2, 0 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 2, 1 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 2, 2 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 2, 3 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1 }, new[] { 2, 4 }, ExpectedResult = new[] { 1 })]
-        [TestCase(new[] { 1, 2 }, new int[] { }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 0 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 1 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 2 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 3 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 4 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 0, 1 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 0, 2 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 0, 3 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 0, 4 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 1, 1 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 1, 2 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 1, 3 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 1, 4 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 2, 1 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 2, 2 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 2, 3 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 2, 4 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 3, 1 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 3, 2 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 3, 3 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 3, 4 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 4, 1 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 4, 2 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2 }, new[] { 4, 3 }, ExpectedResult = new[] { 2, 1 })]
-        [TestCase(new[] { 1, 2 }, new[] { 4, 4 }, ExpectedResult = new[] { 1, 2 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new int[] { }, ExpectedResult = new[] { 1, 2, 3, 4, 5 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 0 }, ExpectedResult = new[] { 1, 2, 3, 4, 5 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 0, 0 }, ExpectedResult = new[] { 1, 2, 3, 4, 5 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 0, 0, 0 }, ExpectedResult = new[] { 1, 2, 3, 4, 5 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1 }, ExpectedResult = new[] { 2, 3, 4, 5, 1 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 0, 1 }, ExpectedResult = new[] { 5, 1, 2, 3, 4 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 1 }, ExpectedResult = new[] { 1, 2, 3, 4, 5 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 1, 1 }, ExpectedResult = new[] { 2, 3, 4, 5, 1 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 1, 1, 1 }, ExpectedResult = new[] { 1, 2, 3, 4, 5 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2 }, ExpectedResult = new[] { 5, 1, 2, 3, 4 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 2, 1 }, ExpectedResult = new[] { 2, 3, 4, 5, 1 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3 }, ExpectedResult = new[] { 3, 4, 5, 1, 2 })]
-        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 4 }, ExpectedResult = new[] { 4, 5, 1, 2, 3 })]
-        public int[] Shift_SourceAndIterationsAreNotNull_ReturnsArrayWithShiftedElements(int[] source, int[] iterations)
+        [TestCase(new int[] { }, new[] { 0 }, new int[] { })]
+        [TestCase(new int[] { }, new int[] { }, new int[] { })]
+        [TestCase(new[] { 1 }, new int[] { }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 0 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 1 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 2 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 3 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 4 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 0, 0 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 0, 1 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 0, 2 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 0, 3 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 0, 4 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 1, 0 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 1, 1 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 1, 2 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 1, 3 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 1, 4 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 2, 0 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 2, 1 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 2, 2 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 2, 3 }, new[] { 1 })]
+        [TestCase(new[] { 1 }, new[] { 2, 4 }, new[] { 1 })]
+        [TestCase(new[] { 1, 2 }, new int[] { }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 0 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 1 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 2 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 3 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 4 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 0, 1 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 0, 2 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 0, 3 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 0, 4 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 1, 1 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 1, 2 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 1, 3 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 1, 4 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 2, 1 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 2, 2 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 2, 3 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 2, 4 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 3, 1 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 3, 2 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 3, 3 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 3, 4 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 4, 1 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 4, 2 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2 }, new[] { 4, 3 }, new[] { 2, 1 })]
+        [TestCase(new[] { 1, 2 }, new[] { 4, 4 }, new[] { 1, 2 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new int[] { }, new[] { 1, 2, 3, 4, 5 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 0 }, new[] { 1, 2, 3, 4, 5 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 0, 0 }, new[] { 1, 2, 3, 4, 5 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 0, 0, 0 }, new[] { 1, 2, 3, 4, 5 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1 }, new[] { 2, 3, 4, 5, 1 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 0, 1 }, new[] { 5, 1, 2, 3, 4 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 1 }, new[] { 1, 2, 3, 4, 5 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 1, 1 }, new[] { 2, 3, 4, 5, 1 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 1, 1, 1 }, new[] { 1, 2, 3, 4, 5 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2 }, new[] { 5, 1, 2, 3, 4 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 2, 1 }, new[] { 2, 3, 4, 5, 1 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3 }, new[] { 3, 4, 5, 1, 2 })]
+        [TestCase(new[] { 1, 2, 3, 4, 5 }, new[] { 1, 2, 3, 4 }, new[] { 4, 5, 1, 2, 3 })]
+        public void Shift_SourceAndIterationsAreNotNull_ReturnsArrayWithShiftedElements(int[] actualResult, int[] iterations, int[] expectedResult)
         {
-            return Shifter.Shift(source, iterations);
+            // Act
+            Shifter.Shift(actualResult, iterations);
+
+            // Assert
+            Assert.That(actualResult, Is.EqualTo(expectedResult));
         }
     }
 }

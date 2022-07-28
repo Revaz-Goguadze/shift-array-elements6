@@ -21,10 +21,10 @@ The task code should be simple and clear as possible.
 
 ### 1. EnumShifter Class
 
-Implement the [Shift](ShiftArrayElements/EnumShifter.cs#L16) method using the `for` statement and array indexes only.
+Implement the [Shift](ShiftArrayElements/EnumShifter.cs#L13) method using the `for` statement and array indexes only.
 
 The `Shift` method has two arguments:
-* The `source` arguments is the array of integers to shift and return. **Do not** create a new array.
+* The `source` arguments is the array of integers to shift.
 * The `directions` argument is the array of values of the [Direction](ShiftArrayElements/Direction.cs) enum type. Each value in the `directions` array is a shift instruction that tells the shift direction for each iteration. The number of iterations is the `direction` array length. The first and the last elements in the `source` array should be wrapped to the other side of the array.
 
 Use `switch` statement to handle `directions` array values. Use `default` branch to handle the values other then `Left` and `Right`.
@@ -89,10 +89,10 @@ The `source` array contains three elements [1, 2, 3]. The `directions` array has
 
 ### 2. Shifter Class
 
-Implement the [Shift](ShiftArrayElements/Shifter.cs#L15) method using the `for` statement, array indexes and `Array.Copy` method.
+Implement the [Shift](ShiftArrayElements/Shifter.cs#L12) method using the `for` statement, array indexes and `Array.Copy` method.
 
 The method has two arguments.
-* The `source` arguments has the array of integers to shift and return. **Do not** create a new array.
+* The `source` arguments has the array of integers to shift.
 * The `iterations` argument has the array of integers. Each value in the `iterations` array is a shift instruction that tells the number of shift iterations. The odd elements (an element with odd index) tells the number of right shift iterations. The even elements (an element with even index or zero index) tells the number of left shift iterations. The first and the last elements in the `source` array should be wrapped to the other side of the array.
 
 See examples for more details regarding the shift algorithm.
